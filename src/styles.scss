@@ -1,0 +1,160 @@
+$nav-link-font-size: 0.875rem !default;
+$navbar-nav-link-padding-x: 1rem !default;
+$nav-link-padding-y: 1rem !default;
+$nav-link-color:  #5f6368 !default;
+$nav-tabs-link-active-color: #0d6efd !default;
+$nav-tabs-link-active-border-color:  #0d6efd !default;
+$nav-tabs-border-width: .0625rem;
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+body {
+    padding-top: 60px;
+  }
+  
+.cuppa-navbar {
+    background: $white;
+    box-shadow: 0 0 0px rgb(0 0 0 / 14%), 0 1px 5px rgb(0 0 0 / 28%);
+}
+.cuppa-brand {
+    max-width: 250px;
+    margin: 0;
+    padding: 0px 15px;
+    color: #000;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.cuppa-brand img{
+
+}
+.cuppa-brand span:nth-child(2){
+    font-size: 1.4rem;
+    color: $gray-900
+}
+.cuppa-brand span:nth-child(3){
+    color: $gray-800
+}
+.sidebar .nav-link {
+    color: #ffffff;
+    font-weight: 400;
+}
+.sidebar .nav-link.active {
+    background-color: $gray-100;
+}
+.navbar .nav-item {
+}
+.navbar .nav-item.active {
+    border-bottom: 2px solid $primary;
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+    border-color: transparent;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: $primary;
+    background-color: transparent;
+    border-color: transparent transparent $primary;
+    border-bottom-width: .2rem;
+}
+.example-button-row .btn {
+    margin: 5px;
+}
+.custom-column-height {
+    height: calc(100vh - 125px);
+}
+.p-datatable .p-datatable-thead > tr > th {
+    padding: 0.25rem 0.5rem !important;
+}
+.p-datatable .p-datatable-tbody > tr > td {
+    padding: 0.5rem 0.5rem !important;
+}
+.p-datatable .p-datatable-scrollable-header, .p-datatable-scrollable-body {
+    font-size: 0.8125rem !important;
+}
+.custom-input {
+    font-size: 0.85rem;
+    border-radius: 0;
+}
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+.form-group.hidden {
+    height: 0;
+}
+.form-group.hidden input{
+    border: none;
+    background: transparent;
+}
+.calendar-rangepicker {
+    display: flex;
+    border: 1px solid #0d6efd;
+}
+.calendar-rangepicker > .input-group:nth-child(1){
+    border-right: 1px solid #0d6efd;
+    width: 80%;
+}
+.calendar-icon {
+    width: 2.75rem;
+}
+.calendar-icon:focus{
+    outline: none;
+    box-shadow: none;
+}
+.calendar-rangepicker .form-control {
+    border: none;
+    height: 30px;
+}
+.calendar-rangepicker .input-group-append .btn{
+    border: none;
+    border-left: 1px solid #0d6efd;
+    border-radius: 0px;
+    padding: 3px 0px;
+}
+.calendar-container {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.p-datatable .p-datatable-thead > tr > th {
+    color: #fff !important;
+    background: #5a91c7 !important;
+}
+.p-datatable .p-sortable-column.p-highlight {
+    background: #5a91c7 !important;
+    color: #fff !important;
+}
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+    color: #fff !important;
+}
+.p-datatable .p-sortable-column.p-highlight:hover {
+    background: #5a91c7e8 !important;
+    color: #fff !important;
+}
+.mobile-picker {
+    margin-bottom: 5px;;
+}
+.ham-btn{
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-left: -30px;
+}
+.ham-btn svg{
+margin-top: -5px;
+}
+a.cuppa-brand {
+    padding: 0 !important;
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+@include media-breakpoint-up(lg) {
+    .ad-container {
+      display: block !important;
+    }
+    .mobile-picker {
+        display: none;
+    }
+    .cuppa-navbar {
+        padding: 0 !important;
+    }
+  }

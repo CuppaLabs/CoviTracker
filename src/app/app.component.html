@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg fixed-top cuppa-navbar">
+  <div class="container-fluid">
+    <div class="navbar-brand cuppa-brand col-lg-2" href="#">
+      <button class="navbar-toggler ham-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+    </button>
+    <a class="navbar-brand cuppa-brand" href="#">
+      <img src="assets/img/vaccine2.png" height="30" alt="" />
+      Covi Tracker
+    </a>
+  </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-sm-block d-md-none d-lg-block">
+        <li class="nav-item calendar-container">
+          <ngbd-datepicker-range-popup></ngbd-datepicker-range-popup>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav m2-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub/q-a-detail/coronavirus-disease-covid-19
+          " target="_blank">WHO Safety Guidelines</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://cuppalabs.github.io/aboutme" target="_blank">About Me</a>
+        </li>
+        <li class="nav-item power-title">
+          <small>Powered by</small>
+          <a style="float: right;" target="__blank" href="https://cuppalabs.github.io"><img src="assets/img/cuppa-logo-coffee11.png" height="20" alt="" /></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row d-flex">
+    <nav id="sidebarMenu2" class="col d-md-block sidebar2 collapse">
+      <div class="position-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <select class="form-select state-select" [(ngModel)]="stateSearch" aria-label="Default select example">
+              <option selected value="All">All States</option>
+                <option *ngFor="let state of states" [value]="state.state_id">{{state.state_name}}</option>
+              
+            </select>
+            <input type="text" class="form-control custom-input" [(ngModel)]="districtSearch" placeholder="Search District">
+
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <nav id="sidebarMenu" class="col d-md-block sidebar collapse">
+      <div class="position-sticky">
+        <ul class="nav flex-column">
+          <span *ngFor="let district of districts | search:districtSearch:stateSearch">
+            <li class="nav-item">
+              <a class="nav-link lit-item-link" [routerLink]="['vaccineTracker/district', district.district_id]" routerLinkActive="active">
+                <span data-feather="home"></span>
+                {{ district.district_name }}
+              </a>
+            </li>
+          </span>
+        </ul>
+      </div>
+    </nav>
+    <main class="col center-content pt-2">
+      <div class="mobile-picker">
+        <ngbd-datepicker-range-popup></ngbd-datepicker-range-popup>
+      </div>
+      
+      <router-outlet></router-outlet>
+    </main>
+    <div class="col ad-container custom-column-height">
+      <ng-adsense [adClient]="'ca-pub-4525567075133342'" [adSlot]="2263435109" [display]="'inline-block'" [width]="300"
+        [height]="250"></ng-adsense>
+      <ng-adsense [adClient]="'ca-pub-4525567075133342'" [adSlot]="6386579727" [display]="'inline-block'" [width]="300"
+        [height]="250"></ng-adsense>
+        <footer class="footer">
+          <p>© 2009-2021 &nbsp; <a href="https://cuppalabs.github.io" style="color: #fff;">Cuppa Labs</a> &nbsp; <b>Made in India</b>.
+            All rights reserved and copyrighted to <b>Pradeep Kumar Terli</b></p>
+            <small>Icon made by Freepik from <a target="__blank" href="https://www.flaticon.com">www.flaticon.com</a></small>
+        </footer>
+    </div>
+  </div>
+</div>

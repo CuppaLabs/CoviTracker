@@ -1,0 +1,74 @@
+<div class="row pt-2 pb-3">
+    <div class="col-auto me-auto">
+        <h5 class="mb-0">{{districtsCollection[districtId]?.district_name}} 
+            <small style="font-size: 10px;">{{centers.length}} Centers</small></h5>
+        <small class="pb-2">{{statesCollection[districtsCollection[districtId]?.state_id]}}</small>
+    </div>
+    <div class="col-auto age-options">
+        <small style="margin-right: 10px;">Age Limit</small><br>
+        <div class="form-check form-check-inline" *ngFor="let item of ageOptions">
+            <input class="form-check-input" type="checkbox" [value]="item.isChecked" (change)="changeSelection(item)" [checked]="item.isChecked">
+            <label class="form-check-label" for="inlineCheckbox1">{{item.label}}</label>
+          </div>
+    </div>
+    <div class="col-lg-5">
+        <input type="text" class="form-control custom-input" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+        placeholder="Search by Hospital/Address/fees type/Pincode" />
+    </div>
+</div>
+<div class="custom-column-height">
+    <p-table #dt1 [value]="centers" sortField="name" [scrollable]="true" scrollHeight="flex" 
+    [globalFilterFields]="['name','block_name','fee_type','pincode']" [loading]="loading">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name" style="width: 20%;" rowspan="2">Hospital<p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="block_name" style="width: 20%;    border-right: 1px solid #fff;" rowspan="2">Address</th>
+                <th colspan="7" style="text-align: center;">Availability</th>
+            </tr>
+            <tr>
+                    <th *ngFor="let day of week" style="text-align: center;">{{day}}</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-center>
+            <tr>
+                <td style="width: 20%;">
+                    {{center.name}}<br>
+                    <span class="badge bg-info">{{center.fee_type}}</span>
+                </td>
+                <td style="width: 20%;">
+                    {{center.block_name}} <br>
+                    <small>{{center.pincode}}</small><br>
+                    <a class="btn btn-link btn-sm map-btn" (click)="openMap(center)">View on map</a>
+                </td>
+                <td *ngFor="let day of week;let i = index;" style="text-align: center;">
+                    <div *ngIf="center.sessions[i]">
+                        <h5>
+                        <span class="badge bg-success" *ngIf="center.sessions[i].available_capacity > 0">
+                            {{center.sessions[i].available_capacity}}
+                        </span>
+                        <span class="badge bg-danger" *ngIf="center.sessions[i].available_capacity === 0">
+                            {{center.sessions[i].available_capacity}}
+                        </span>
+                    </h5>
+                    <small class="age-limit">{{center.sessions[i].min_age_limit}}+</small>
+                </div>
+                <div *ngIf="!center.sessions[i]">
+                    <h5>
+                        <span class="badge bg-danger">
+                            0
+                        </span>
+                    </h5>
+                    <small class="age-limit" style="visibility: hidden;">0</small>
+                </div>
+
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="9" style="text-align: center;">No vaccination centers available.</td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+</div>
