@@ -10,7 +10,8 @@ const appRoutes: Routes = [
 {
   path: "informationCenter",
   loadChildren: () => import('./information-center/information-center.module').then(m => m.InformationCenterModule)
-}];
+},
+{ path: '',   redirectTo: '/vaccineTracker', pathMatch: 'full' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes, { useHash: false })],
