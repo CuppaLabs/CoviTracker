@@ -34,24 +34,5 @@ export class AppComponent implements OnInit {
     this.updates.activateUpdate().then(() => document.location.reload());
   }
   ngOnInit(){
-    combineLatest([this.appService.getDistricts(), this.appService.getStates()])
-    .pipe()
-    .subscribe(([districts, states]: any) => {
-      this.districts = districts;
-      this.states = states.states;
-      const statesCollection = {};
-      const districtsCollection = {};
-      states.states.forEach(state => {
-        statesCollection[state.state_id] = state.state_name;
-      });
-      districts.forEach(district => {
-        districtsCollection[district.district_id] = district;
-      })
-      if(!this.router.url.includes('vaccineTracker/district')){
-        this.router.navigate(['vaccineTracker/district/582']);
-      }
-      this.appService.statesCollection.next(statesCollection);
-      this.appService.districtsCollection.next(districtsCollection);
-    })
   }
 }

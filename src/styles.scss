@@ -47,6 +47,9 @@ body {
 .navbar .nav-item.active {
     border-bottom: 2px solid $primary;
 }
+.navbar .nav-item.active a {
+    color: $primary;
+}
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
     border-color: transparent;
 }

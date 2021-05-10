@@ -1,74 +1,49 @@
-<div class="row pt-2 pb-3">
-    <div class="col-auto me-auto">
-        <h5 class="mb-0">{{districtsCollection[districtId]?.district_name}} 
-            <small style="font-size: 10px;">{{centers.length}} Centers</small></h5>
-        <small class="pb-2">{{statesCollection[districtsCollection[districtId]?.state_id]}}</small>
-    </div>
-    <div class="col-auto age-options">
-        <small style="margin-right: 10px;">Age Limit</small><br>
-        <div class="form-check form-check-inline" *ngFor="let item of ageOptions">
-            <input class="form-check-input" type="checkbox" [value]="item.isChecked" (change)="changeSelection(item)" [checked]="item.isChecked">
-            <label class="form-check-label" for="inlineCheckbox1">{{item.label}}</label>
-          </div>
-    </div>
-    <div class="col-lg-5">
-        <input type="text" class="form-control custom-input" (input)="dt1.filterGlobal($event.target.value, 'contains')"
-        placeholder="Search by Hospital/Address/fees type/Pincode" />
-    </div>
-</div>
-<div class="custom-column-height">
-    <p-table #dt1 [value]="centers" sortField="name" [scrollable]="true" scrollHeight="flex" 
-    [globalFilterFields]="['name','block_name','fee_type','pincode']" [loading]="loading">
-        <ng-template pTemplate="header">
-            <tr>
-                <th pSortableColumn="name" style="width: 20%;" rowspan="2">Hospital<p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="block_name" style="width: 20%;    border-right: 1px solid #fff;" rowspan="2">Address</th>
-                <th colspan="7" style="text-align: center;">Availability</th>
-            </tr>
-            <tr>
-                    <th *ngFor="let day of week" style="text-align: center;">{{day}}</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-center>
-            <tr>
-                <td style="width: 20%;">
-                    {{center.name}}<br>
-                    <span class="badge bg-info">{{center.fee_type}}</span>
-                </td>
-                <td style="width: 20%;">
-                    {{center.block_name}} <br>
-                    <small>{{center.pincode}}</small><br>
-                    <a class="btn btn-link btn-sm map-btn" (click)="openMap(center)">View on map</a>
-                </td>
-                <td *ngFor="let day of week;let i = index;" style="text-align: center;">
-                    <div *ngIf="center.sessions[i]">
-                        <h5>
-                        <span class="badge bg-success" *ngIf="center.sessions[i].available_capacity > 0">
-                            {{center.sessions[i].available_capacity}}
-                        </span>
-                        <span class="badge bg-danger" *ngIf="center.sessions[i].available_capacity === 0">
-                            {{center.sessions[i].available_capacity}}
-                        </span>
-                    </h5>
-                    <small class="age-limit">{{center.sessions[i].min_age_limit}}+</small>
-                </div>
-                <div *ngIf="!center.sessions[i]">
-                    <h5>
-                        <span class="badge bg-danger">
-                            0
-                        </span>
-                    </h5>
-                    <small class="age-limit" style="visibility: hidden;">0</small>
-                </div>
+<div class="row d-flex">
+    <nav id="sidebarMenu2" class="col d-md-block sidebar2 collapse">
+      <div class="position-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <select class="form-select state-select" [(ngModel)]="stateSearch" aria-label="Default select example">
+              <option selected value="All">All States</option>
+                <option *ngFor="let state of states" [value]="state.state_id">{{state.state_name}}</option>
+              
+            </select>
+            <input type="text" class="form-control custom-input" [(ngModel)]="districtSearch" placeholder="Search District">
 
-                </td>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td colspan="9" style="text-align: center;">No vaccination centers available.</td>
-            </tr>
-        </ng-template>
-
-    </p-table>
-</div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <nav id="sidebarMenu" class="col d-md-block sidebar collapse">
+      <div class="position-sticky">
+        <ul class="nav flex-column">
+          <span *ngFor="let district of districts | search:districtSearch:stateSearch">
+            <li class="nav-item">
+              <a class="nav-link lit-item-link" [routerLink]="['district', district.district_id]" routerLinkActive="active">
+                <span data-feather="home"></span>
+                {{ district.district_name }}
+              </a>
+            </li>
+          </span>
+        </ul>
+      </div>
+    </nav>
+    <main class="col center-content pt-2">
+      <div class="mobile-picker">
+        <ngbd-datepicker-range-popup></ngbd-datepicker-range-popup>
+      </div>
+      
+      <router-outlet></router-outlet>
+    </main>
+    <div class="col ad-container custom-column-height">
+      <ng2-adsense [adClient]="'ca-pub-4525567075133342'" [adSlot]="2263435109" [display]="'inline-block'" [width]="300"
+        [height]="250" adFormat="rectangle" [className]="'cuppa-ad'"></ng2-adsense>
+      <ng2-adsense [adClient]="'ca-pub-4525567075133342'" [adSlot]="6386579727" [display]="'inline-block'" [width]="300"
+        [height]="250" [className]="'cuppa-ad'"></ng2-adsense>
+        <footer class="footer">
+          <p>© 2009-2021 &nbsp; <a href="https://cuppalabs.github.io" style="color: #fff;">Cuppa Labs</a> &nbsp; <b>Made in India</b>.
+            All rights reserved and copyrighted to <b>Pradeep Kumar Terli</b></p>
+            <small>Icon made by Freepik from <a target="__blank" href="https://www.flaticon.com">www.flaticon.com</a></small>
+        </footer>
+    </div>
+  </div>

@@ -13,16 +13,14 @@ import { NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdsenseModule } from 'ng2-adsense';
 import { VaccineTrackerModule } from './vaccine-tracker/vaccine-tracker.module';
 import { AppServices } from './app.services';
-import { SearchPipe } from './filter.pipe';
 import { NgbdDatepickerRangePopup } from './daterangepicker/daterange-picker.component';
 import { ClickOutsideDirective } from './daterangepicker/clickoutside.directive';
+import { SharedModule } from './shared.module';
+import { DISQUS_SHORTNAME } from 'ngx-disqus';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SearchPipe,
-    NgbdDatepickerRangePopup,
-    ClickOutsideDirective
+    AppComponent
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -30,9 +28,8 @@ import { ClickOutsideDirective } from './daterangepicker/clickoutside.directive'
     FormsModule,
     AppRouterModule,
     HttpClientModule,
-    VaccineTrackerModule,
     AdsenseModule.forRoot(),
-    NgbModule,
+    SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -42,7 +39,7 @@ import { ClickOutsideDirective } from './daterangepicker/clickoutside.directive'
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [AppServices, CheckForUpdateService],
+  providers: [AppServices, CheckForUpdateService, { provide: DISQUS_SHORTNAME, useValue: 'cuppalabs' }],
   bootstrap: [AppComponent],
   entryComponents: [],
 })
