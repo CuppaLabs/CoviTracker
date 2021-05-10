@@ -193,3 +193,20 @@
 .power-title  img{
   margin-top: -5px;
 }
+.share-list  {
+  display: flex;
+  align-items: center;
+}
+.share-list a {
+  padding: 0px 10px;
+  font-size: 1.5rem;
+}
+.share-item.fb{
+  color: #385898;
+}
+.share-item.linkedin{
+  color: #0a66c2;
+}
+.share-item.twitter{
+  color: rgba(29,161,242,1.00);
+}
