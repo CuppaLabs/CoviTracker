@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
         districtsCollection[district.district_id] = district;
       })
       if(!this.router.url.includes('vaccineTracker/district')){
-        this.router.navigate(['vaccineTracker/district/265']);
+        this.router.navigate(['vaccineTracker/district/582']);
       }
       this.appService.statesCollection.next(statesCollection);
       this.appService.districtsCollection.next(districtsCollection);
