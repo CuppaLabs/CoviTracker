@@ -16,7 +16,7 @@ export class AppServices {
     }
     getDistricts(): Observable<HttpResponse<any>> {
         return this.http.get<any>(
-            '/assets/content/districts.json');
+            `${environment.webUrl}/assets/content/districts.json`);
     }
     getStates(): Observable<HttpResponse<any>> {
         return this.http.get<any>(
