@@ -55,8 +55,8 @@
                 </ul>
                 <ul class="nav flex-column">
                   <span *ngFor="let district of districts | search:districtSearch:stateSearch">
-                    <li class="nav-item">
-                      <a class="nav-link lit-item-link" [routerLink]="['district', district.district_id]" routerLinkActive="active">
+                    <li class="nav-item nav-item-link" routerLinkActive="active">
+                      <a class="nav-link lit-item-link" data-bs-dismiss="modal" [routerLink]="['district', district.district_id]" routerLinkActive="active">
                         <span data-feather="home"></span>
                         {{ district.district_name }}
                       </a>

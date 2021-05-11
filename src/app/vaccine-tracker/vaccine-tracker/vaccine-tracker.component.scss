@@ -80,6 +80,7 @@
     background: #007bff;
     color: #fff;
   }
+
   
   .sidebar .nav-link:hover .feather,
   .sidebar .nav-link.active .feather {
@@ -112,6 +113,13 @@
 .lit-item-link {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+.nav-item-link.active {
+  background: #007bff;
+    color: #fff;
+}
+.nav-item-link.active .lit-item-link {
+  color: #fff;
 }
 .sidebar2 .custom-input{
   border-right: 0;
