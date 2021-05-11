@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1620693085934,
+  "timestamp": 1620729940494,
   "index": "/CoviTracker/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "/CoviTracker/5.9f316073e6ed798498aa.js",
         "/CoviTracker/favicon.ico",
         "/CoviTracker/index.html",
-        "/CoviTracker/main.237c6ad220cbcc19d497.js",
+        "/CoviTracker/main.444e3de41f7ee4fbe70e.js",
         "/CoviTracker/manifest.webmanifest",
         "/CoviTracker/polyfills.3116b8e9dbb90fea460e.js",
         "/CoviTracker/runtime.14086438557320650cde.js",
@@ -33,6 +33,7 @@
       },
       "urls": [
         "/CoviTracker/assets/content/districts.json",
+        "/CoviTracker/assets/content/states.json",
         "/CoviTracker/assets/icons/icon-128x128.png",
         "/CoviTracker/assets/icons/icon-144x144.png",
         "/CoviTracker/assets/icons/icon-152x152.png",
@@ -64,6 +65,7 @@
     "/CoviTracker/4.f7eaaba0750bac2b7bdd.js": "55696635dc3d05b3cf4f187fe1cdf95b08f04230",
     "/CoviTracker/5.9f316073e6ed798498aa.js": "880dbf642e258041cb1bb5d95e3442347e11a98d",
     "/CoviTracker/assets/content/districts.json": "89a3391cf437c3a9e6e48ef09b8acc92ced10d69",
+    "/CoviTracker/assets/content/states.json": "a21c6592b515c752f2f67c95b207b8a167c1a288",
     "/CoviTracker/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "/CoviTracker/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
     "/CoviTracker/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
@@ -83,8 +85,8 @@
     "/CoviTracker/color.6441e63a57ccc5105bad.png": "ff4c4bcb2207891b292f544edb4da9d2df5d45cf",
     "/CoviTracker/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
     "/CoviTracker/hue.f8505bd4d6f3e3aa435b.png": "f81ae627637a684614aa726e206c73ce099a01fd",
-    "/CoviTracker/index.html": "8ff86be1ad045fb75852bd654877bcc3af24407a",
-    "/CoviTracker/main.237c6ad220cbcc19d497.js": "fa318927bb52ec735db457e9fc7d2d2fe569b546",
+    "/CoviTracker/index.html": "6d283a75ab625c512b3173425a84de999168666f",
+    "/CoviTracker/main.444e3de41f7ee4fbe70e.js": "156270d1a8f05abaa88dd36c37bcc9e09f036da6",
     "/CoviTracker/manifest.webmanifest": "beff38490b4ec2cecfd520b0169312b23ecb77b9",
     "/CoviTracker/polyfills.3116b8e9dbb90fea460e.js": "0d003992512d28c544b0a972ce2ae6b28ebbf5f6",
     "/CoviTracker/primeicons.3a0d4a58da62cf7c55bb.ttf": "13889b5e1915891dd548d6b71c1cccddb469e13d",
