@@ -31,6 +31,42 @@
     <main class="col center-content pt-2">
       <div class="mobile-picker">
         <ngbd-datepicker-range-popup></ngbd-datepicker-range-popup>
+        
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Districts</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <select class="form-select state-select" [(ngModel)]="stateSearch" aria-label="Default select example">
+                      <option selected value="All">All States</option>
+                        <option *ngFor="let state of states" [value]="state.state_id">{{state.state_name}}</option>
+                      
+                    </select>
+                    <input type="text" class="form-control custom-input" [(ngModel)]="districtSearch" placeholder="Search District">
+        
+                  </li>
+                </ul>
+                <ul class="nav flex-column">
+                  <span *ngFor="let district of districts | search:districtSearch:stateSearch">
+                    <li class="nav-item">
+                      <a class="nav-link lit-item-link" [routerLink]="['district', district.district_id]" routerLinkActive="active">
+                        <span data-feather="home"></span>
+                        {{ district.district_name }}
+                      </a>
+                    </li>
+                  </span>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       
       <router-outlet></router-outlet>
