@@ -23,7 +23,9 @@ export class VaccineTrackerComponent implements OnInit {
      private router: Router, private activatedRoute: ActivatedRoute){
   }
   ngOnInit(){
-    
+    if(!this.router.url.includes('district')){
+      this.router.navigate(['vaccineTracker/district/582']);
+    }
     combineLatest([this.appService.getDistricts(), this.appService.getStates()])
     .pipe()
     .subscribe(([districts, states]: any) => {
