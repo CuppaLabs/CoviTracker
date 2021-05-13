@@ -4,9 +4,11 @@ import * as moment from "moment";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
 import { environment } from "src/environments/environment.prod";
+import { TimestampObservableCache } from "./models/timestamp-observable-cache.model";
 
 @Injectable()
 export class AppServices {
+    dataCache: { [id: string]: any};
 
     public responseCache = new Map();
 
@@ -15,7 +17,9 @@ export class AppServices {
     districtsCollection: BehaviorSubject<any> = new BehaviorSubject<any>({});
     selectedDate: BehaviorSubject<any> = new BehaviorSubject<any>(moment(new Date(), 'DD-MM-YYYY', false).format('DD-MM-YYYY'));
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { 
+        this.dataCache = {};
+    }
     setDate(date) {
         this.selectedDate.next(moment(date, 'DD-MM-YYYY', false).format('DD-MM-YYYY'));
     }
@@ -32,14 +36,14 @@ export class AppServices {
     }
     getStates(): Observable<HttpResponse<any>> {
         const URL = `${environment.webUrl}/assets/content/states.json`;
-        const statesFromCache = this.responseCache.get(URL);
-        if (statesFromCache) {
-            return of(statesFromCache);
+        if (this.getCacheItem(URL)) {
+            return this.getCacheItem(URL);
         }
-        return this.http.get<any>(URL).pipe(map(data => {
-            this.responseCache.set(URL, data);
+        const observable = this.http.get<any>(URL).pipe(map(data => {
             return data
         }));
+        this.setCacheItem(URL, observable);
+        return observable;
     }
     getDistrictsByState(stateId: any): Observable<HttpResponse<any>> {
         return this.http.get<any>(
@@ -49,7 +53,15 @@ export class AppServices {
         const params = new HttpParams()
             .set('district_id', districtId)
             .set('date', date);
-        return this.http.get<any>(`${environment.baseUrl}/appointment/sessions/public/calendarByDistrict?${params.toString()}`);
+            const URL = `${environment.baseUrl}/appointment/sessions/public/calendarByDistrict?${params.toString()}`;
+            if (this.getCacheItem(URL)) {
+                return of(this.getCacheItem(URL));
+            }
+            return this.http.get<any>(URL).pipe(map(data => {
+                this.setCacheItem(URL, data);
+                return data
+            }));
+            
     }
     getAllTotals(): Observable<HttpResponse<any>> {
         return this.http.get<any>(
@@ -59,4 +71,28 @@ export class AppServices {
         return this.http.get<any>(
             'https://disease.sh/v3/covid-19/historical/all?lastdays=all');
     }
+    getCacheItem(key: string): any {
+        let cacheItem = this.dataCache[key];
+    
+        if (!cacheItem) {
+            return null;
+        }
+    
+        // delete the cache item if it has expired
+        if (cacheItem.expires <= Date.now()) {
+            this.deleteCacheItem(key);
+            return null;
+        }
+    
+        return cacheItem?.data;
+      }
+    
+      setCacheItem(key: string, value: any): void {
+          const EXPIRES = Date.now() + (1000 * 60 * 60) / 2;
+          this.dataCache[key] = { expires: EXPIRES, data: value };
+      }
+    
+      deleteCacheItem(key: string) {
+          delete this.dataCache[key];
+      }
 }

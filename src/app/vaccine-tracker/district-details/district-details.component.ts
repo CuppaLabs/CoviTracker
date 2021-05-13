@@ -27,7 +27,18 @@ export class DistrictDetailsComponent implements OnInit {
   week: any = [];
   selectedCities: string[] = [];
   checkedIDs: any = [];
-  selectedItemsList: any = [];
+  selectedAgeOptions: any = [    {
+    id: 'C001',
+    label: '18+',
+    isChecked: true,
+    value: 18
+  },
+  {
+    id: 'C002',
+    label: '45+',
+    isChecked: true,
+    value: 45
+  }];
   ageOptions = [
     {
       id: 'C001',
@@ -41,6 +52,8 @@ export class DistrictDetailsComponent implements OnInit {
       isChecked: true,
       value: 45
     }]
+    vaccineBrand: any = 'All';
+    ageGroup: any = 'All';
   constructor(private filterService: FilterService, private router:Router, private route: ActivatedRoute, private appService: AppServices) { 
     
   }
@@ -72,6 +85,7 @@ export class DistrictDetailsComponent implements OnInit {
     ).subscribe((data: any) => {
       this.centers = data.centers;
       this.cachedCenters = data.centers;
+      this.filterList();
       this.loading = false;
     });
     this.fetchCheckedIDs();
@@ -81,7 +95,7 @@ export class DistrictDetailsComponent implements OnInit {
     this.fetchSelectedItems();
   }
   fetchSelectedItems() {
-    this.selectedItemsList = this.ageOptions.filter((value, index) => {
+    this.selectedAgeOptions = this.ageOptions.filter((value, index) => {
       return value.isChecked
     });
     this.filterList();
@@ -95,14 +109,28 @@ export class DistrictDetailsComponent implements OnInit {
     });
   }
   filterList(){
-    if(this.selectedItemsList.length == 1){
-      let filteredArray = this.centers.filter((element) => element.sessions.some((subElement) => subElement.min_age_limit === this.selectedItemsList[0].value));
+    if(this.ageGroup !== 'All' && this.vaccineBrand == 'All'){
+      let filteredArray = this.cachedCenters.filter((element) => element.sessions.some((subElement) => subElement.min_age_limit === parseInt(this.ageGroup)));
+      this.centers = filteredArray;
+    }
+    else if(this.ageGroup !== 'All' && this.vaccineBrand !== 'All'){
+      let filteredArray = this.cachedCenters.filter((element) => element.sessions.some((subElement) => subElement.min_age_limit === parseInt(this.ageGroup) && subElement.vaccine == this.vaccineBrand));
+      this.centers = filteredArray;
+    }
+    else if(this.ageGroup == 'All' && this.vaccineBrand !== 'All'){
+      let filteredArray = this.cachedCenters.filter((element) => element.sessions.some((subElement) => subElement.vaccine == this.vaccineBrand));
       this.centers = filteredArray;
     }
     else {
       this.centers = this.cachedCenters;
     }
 
+  }
+  changeBrand(brand: any){
+    this.filterList();
+  }
+  changeAge(age: any) {
+    this.filterList();
   }
   openMap(center){
     window.open('http://maps.google.com/?q='+center.name+' '+center.address+' '+center.pincode);

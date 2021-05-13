@@ -150,6 +150,28 @@ a.cuppa-brand {
 .navbar-toggler:focus {
     box-shadow: none;
 }
+.brand-options select, .age-options select{
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 0.85rem;
+}
+.form-select:focus {
+    box-shadow: none;
+}
+.hospital-column {
+    width: 35%;
+}
+.address-column {
+    display: none;
+    border-right: 1px solid #fff !important;
+}
+.hospital-column .bg-warning, .hospital-column .bg-primary {
+    margin: 0px 2px;
+}
+.map-btn {
+    padding: 0px;
+    text-align: left;
+}
 @include media-breakpoint-up(lg) {
     .ad-container {
       display: block !important;
@@ -159,5 +181,28 @@ a.cuppa-brand {
     }
     .cuppa-navbar {
         padding: 0 !important;
+    }
+    .age-options, .brand-options {
+        font-size: 0.85rem;
+        padding: 0px 2px;
+    }
+    .brand-options select, .age-options select{
+        font-size: 0.85rem;
+        padding: 0.4rem 2.25rem 0.4rem 0.75rem;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .table-filter {
+        margin: 0px !important;
+    }
+    .hospital-column {
+        width: 30%;
+    }
+    .address-column {
+        display: table-cell;
+        width: 15%;
+    }
+    .hospital-column .bg-warning, .hospital-column .bg-primary {
+        margin: 0px 5px;
     }
   }
